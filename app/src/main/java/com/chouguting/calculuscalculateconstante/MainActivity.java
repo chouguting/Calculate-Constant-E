@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         accNum.setText(Double.toString(accuracy));
         theNum.setText(Double.toString(calculateNum));
     }
-    
+
     public void nextNum(View view) {
         TextView accNum=(TextView)findViewById(R.id.accuracyNum);
         TextView theNum=(TextView)findViewById(R.id.nemberText);
