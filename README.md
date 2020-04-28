@@ -5,4 +5,4 @@
 
 
 
-Google play 下載: https://ce.chouguting.com
+Google play 下載: ce.chouguting.com
