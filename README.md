@@ -5,8 +5,7 @@
 Google play 下載: http://ce.chouguting.com/
 
 
-.可以用兩
-三種方法計算E
+.可以用三種方法計算E
 ,能計算到多精確取決於手機的好壞
 
 >主要是這三種:
