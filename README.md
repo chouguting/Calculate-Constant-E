@@ -11,12 +11,12 @@ Google play 下載: http://ce.chouguting.com/
 
 >主要是這三種:
 >>1.面積
->>![image](https://github.com/chouguting/Calculate-Constant-E/blob/master/area.png)
+>>>![image](https://github.com/chouguting/Calculate-Constant-E/blob/master/area.png)
 
-2.極限
-![image](https://github.com/chouguting/Calculate-Constant-E/blob/master/limit.png)
+>>2.極限
+>>>![image](https://github.com/chouguting/Calculate-Constant-E/blob/master/limit.png)
 
-3.階乘
-![image](https://github.com/chouguting/Calculate-Constant-E/blob/master/factorial.png)
+>>3.階乘
+>>>![image](https://github.com/chouguting/Calculate-Constant-E/blob/master/factorial.png)
 
 
