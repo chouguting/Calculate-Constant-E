@@ -1,18 +1,13 @@
 package com.chouguting.calculuscalculateconstante;
 
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.math.MathUtils;
-
-import java.util.stream.IntStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +15,10 @@ public class MainActivity extends AppCompatActivity {
     double accuracy=1;
     double calculateNum=0;
     int imageIndex=0;
+    int isAreaMethod = 0;
+    Double limResult = 1.0;
+    int isLimitMethod = 0;
+    long limitCurrent = 1;
 
     private static final Integer[] headers = {
             R.drawable.header,
@@ -42,23 +41,32 @@ public class MainActivity extends AppCompatActivity {
         int orientation = getResources().getConfiguration().orientation;
         ImageView headImage= findViewById(R.id.headerImage);
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            // In landscape
-
+            // 橫
             headImage.setVisibility(View.GONE);
         } else {
-            // In portrait
+            //直
             headImage.setVisibility(View.VISIBLE);
         }
     }
 
-    int isAreaMethod=0;
-    public void nextNum(View view) {
+
+    //面積算法
+    public void nextNum(View view) throws InterruptedException {
+
         TextView accNum = findViewById(R.id.accuracyNum);
         TextView theNum = findViewById(R.id.nemberText);
         TextView method = findViewById(R.id.methodName);
-        method.setText("面積算法");
+        TextView timesText = findViewById(R.id.timesTimeText);
+        Button limB = findViewById(R.id.limitButton);
+        ImageView headImage = findViewById(R.id.headerImage);
         Button nextB= findViewById(R.id.nextButton);
+        headImage.setImageResource(R.drawable.area);
+        method.setText("面積算法");
+        timesText.setText("精度:");
+        limB.setText("極限算法");
 
+
+        isLimitMethod = 0;
         if(isAreaMethod==0){
             accNum.setText(Double.toString(accuracy));
             nextB.setText("下一個");
@@ -75,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 if (sum >= 1) {
                     break;
                 }
+
             }
             sum = 0;
             while (true) {
@@ -89,49 +98,93 @@ public class MainActivity extends AppCompatActivity {
         theNum.setText(Double.toString(calculateNum));
     }
 
-    public void resetNum(View view) {
-        ImageView headImage= findViewById(R.id.headerImage);
-        Button nextB= findViewById(R.id.nextButton);
-        TextView accNum= findViewById(R.id.accuracyNum);
-        TextView method = findViewById(R.id.methodName);
-        TextView theNum= findViewById(R.id.nemberText);
-        nextB.setText("面積算法");
-        imageIndex++;
-        isAreaMethod=0;
-        if(imageIndex==6)imageIndex=0;
-        headImage.setImageResource(headers[imageIndex]);
-        accuracy=1;
-        accNum.setText("--");
-        method.setText("請選擇算法");
-        calculateNum=0;
 
-        theNum.setText("--");
-    }
-
-
-
-    public  double Euler() {
-        double e=1;
-        double f=1;
-        for ( int i=1; i <= 10000; i++) {
-            f = f * (1.0 / i);
-            if ( f == 0 ) break;
-            e +=  f;
-        }
-        return e;
-    }
-
+    //階乘算法
     public void nextProductNum(View view) {
+        Button limB = findViewById(R.id.limitButton);
         Button nextB= findViewById(R.id.nextButton);
-        nextB.setText("面積算法");
+        TextView timesText = findViewById(R.id.timesTimeText);
+        ImageView headImage = findViewById(R.id.headerImage);
         TextView method = findViewById(R.id.methodName);
+        TextView accNum = findViewById(R.id.accuracyNum);
+        TextView theNum = findViewById(R.id.nemberText);
+
+        headImage.setImageResource(R.drawable.factorial);
+        nextB.setText("面積算法");
+        limB.setText("極限算法");
+        timesText.setText("次數:");
+
         method.setText("階乘算法");
         isAreaMethod=0;
-        TextView accNum= findViewById(R.id.accuracyNum);
+        isLimitMethod = 0;
 
         accNum.setText("10000 iteration");
-        TextView theNum= findViewById(R.id.nemberText);
-        theNum.setText(Double.toString(Euler()));
 
+
+        double e = 1;
+        double f = 1;
+        for (int i = 1; i <= 10000; i++) {
+            f = f * (1.0 / i);
+            if (f == 0) break;
+            e += f;
+        }
+        theNum.setText(Double.toString(e));
+
+    }
+
+
+    //極限算法
+    public void limitNum(View view) {
+        Button nextB = findViewById(R.id.nextButton);
+        Button limB = findViewById(R.id.limitButton);
+        TextView timesText = findViewById(R.id.timesTimeText);
+        TextView accNum = findViewById(R.id.accuracyNum);
+        TextView theNum = findViewById(R.id.nemberText);
+        TextView method = findViewById(R.id.methodName);
+        ImageView headImage = findViewById(R.id.headerImage);
+        headImage.setImageResource(R.drawable.limit);
+        nextB.setText("面積算法");
+        limB.setText("極限算法");
+        timesText.setText("極限次數:");
+        method.setText("極限算法");
+        isAreaMethod = 0;
+        if (isLimitMethod == 0) {
+            accNum.setText(String.valueOf(limitCurrent));
+            limB.setText("下一個");
+            isLimitMethod = 1;
+        } else {
+            limitCurrent = limitCurrent * 10;
+            accNum.setText(String.valueOf(limitCurrent));
+            limResult = Math.pow((1 + (1.0 / limitCurrent)), limitCurrent);
+        }
+        theNum.setText(Double.toString(limResult));
+    }
+
+
+    //重設按鈕
+    public void resetNum(View view) {
+        ImageView headImage = findViewById(R.id.headerImage);
+        Button limB = findViewById(R.id.limitButton);
+        Button nextB = findViewById(R.id.nextButton);
+        TextView accNum = findViewById(R.id.accuracyNum);
+        TextView method = findViewById(R.id.methodName);
+        TextView timesText = findViewById(R.id.timesTimeText);
+        TextView theNum = findViewById(R.id.nemberText);
+        nextB.setText("面積算法");
+        limB.setText("極限算法");
+        timesText.setText("精度:");
+        imageIndex++;
+        isAreaMethod = 0;
+        isLimitMethod = 0;
+        limitCurrent = 1;
+        if (imageIndex == 6) imageIndex = 0;
+        limitCurrent = 1;
+        limResult = 1.0;
+        headImage.setImageResource(headers[imageIndex]);
+        accuracy = 1;
+        accNum.setText("--");
+        method.setText("請選擇算法");
+        calculateNum = 0;
+        theNum.setText("--");
     }
 }
