@@ -36,6 +36,51 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="上界:"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/upper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:text="--"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="下界:"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/lower"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:text="--"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -156,7 +201,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginRight="10dp"
-                android:text="Photo Credits: 林雅芸, wiki, mathsisfun"
+                android:text="Photo Credits: 林雅芸, wiki, mathsisfun, 朱庭君"
                 android:textSize="10sp" />
 
         </LinearLayout>

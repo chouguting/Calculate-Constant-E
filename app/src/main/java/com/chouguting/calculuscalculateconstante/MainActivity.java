@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.header3,
             R.drawable.header4,
             R.drawable.header5,
-            R.drawable.header6
+            R.drawable.header6,
+            R.drawable.header7
     };
 
 
@@ -49,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    double indexTop = 1;
+    double indexDown = 1;
+    int isFactorial = 0;
+    double calE = 1;
+    long factorialTime = 1;
 
     //面積算法
     public void nextNum(View view) throws InterruptedException {
@@ -56,27 +62,33 @@ public class MainActivity extends AppCompatActivity {
         TextView accNum = findViewById(R.id.accuracyNum);
         TextView theNum = findViewById(R.id.nemberText);
         TextView method = findViewById(R.id.methodName);
+        TextView upperText = findViewById(R.id.upper);
+        TextView lowerText = findViewById(R.id.lower);
         TextView timesText = findViewById(R.id.timesTimeText);
         Button limB = findViewById(R.id.limitButton);
         ImageView headImage = findViewById(R.id.headerImage);
         Button nextB= findViewById(R.id.nextButton);
+        Button productB = findViewById(R.id.productButton);
         headImage.setImageResource(R.drawable.area);
         method.setText("面積算法");
         timesText.setText("精度:");
         limB.setText("極限算法");
+        productB.setText("階乘算法");
 
-
+        isFactorial = 0;
         isLimitMethod = 0;
         if(isAreaMethod==0){
             accNum.setText(Double.toString(accuracy));
+            upperText.setText(Double.toString(indexDown));
+            lowerText.setText(Double.toString(indexTop));
             nextB.setText("下一個");
             isAreaMethod=1;
         }else {
             double sum = 0;
             accuracy = accuracy * 0.1;
             accNum.setText(Double.toString(accuracy));
-            double indexTop = 1;
-            double indexDown = 1;
+            indexTop = 1;
+            indexDown = 1;
             while (true) {
                 sum = sum + (1 / indexTop) * accuracy;
                 indexTop = indexTop + accuracy;
@@ -94,20 +106,29 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             calculateNum = (indexTop + indexDown) / 2;
+
         }
+
+        upperText.setText(Double.toString(indexDown));
+        lowerText.setText(Double.toString(indexTop));
         theNum.setText(Double.toString(calculateNum));
     }
-
 
     //階乘算法
     public void nextProductNum(View view) {
         Button limB = findViewById(R.id.limitButton);
         Button nextB= findViewById(R.id.nextButton);
+        Button productB = findViewById(R.id.productButton);
         TextView timesText = findViewById(R.id.timesTimeText);
         ImageView headImage = findViewById(R.id.headerImage);
         TextView method = findViewById(R.id.methodName);
         TextView accNum = findViewById(R.id.accuracyNum);
         TextView theNum = findViewById(R.id.nemberText);
+
+        TextView upperText = findViewById(R.id.upper);
+        TextView lowerText = findViewById(R.id.lower);
+        upperText.setText("--");
+        lowerText.setText("--");
 
         headImage.setImageResource(R.drawable.factorial);
         nextB.setText("面積算法");
@@ -118,17 +139,25 @@ public class MainActivity extends AppCompatActivity {
         isAreaMethod=0;
         isLimitMethod = 0;
 
-        accNum.setText("10000 iteration");
-
-
-        double e = 1;
-        double f = 1;
-        for (int i = 1; i <= 10000; i++) {
-            f = f * (1.0 / i);
-            if (f == 0) break;
-            e += f;
+        if (isFactorial == 0) {
+            isFactorial = 1;
+            productB.setText("下一個");
+            theNum.setText(Double.toString(calE));
+            accNum.setText(String.valueOf(factorialTime));
+        } else {
+            factorialTime = factorialTime + 1;
+            accNum.setText(String.valueOf(factorialTime));
+            double e = 1;
+            double f = 1;
+            for (int i = 1; i <= factorialTime; i++) {
+                f = f * (1.0 / i);
+                if (f == 0) break;
+                e += f;
+            }
+            calE = e;
+            theNum.setText(Double.toString(calE));
         }
-        theNum.setText(Double.toString(e));
+
 
     }
 
@@ -141,12 +170,19 @@ public class MainActivity extends AppCompatActivity {
         TextView accNum = findViewById(R.id.accuracyNum);
         TextView theNum = findViewById(R.id.nemberText);
         TextView method = findViewById(R.id.methodName);
+        Button productB = findViewById(R.id.productButton);
         ImageView headImage = findViewById(R.id.headerImage);
         headImage.setImageResource(R.drawable.limit);
+        TextView upperText = findViewById(R.id.upper);
+        TextView lowerText = findViewById(R.id.lower);
+        upperText.setText("--");
+        lowerText.setText("--");
         nextB.setText("面積算法");
         limB.setText("極限算法");
         timesText.setText("極限次數:");
         method.setText("極限算法");
+        productB.setText("階乘算法");
+        isFactorial = 0;
         isAreaMethod = 0;
         if (isLimitMethod == 0) {
             accNum.setText(String.valueOf(limitCurrent));
@@ -170,14 +206,23 @@ public class MainActivity extends AppCompatActivity {
         TextView method = findViewById(R.id.methodName);
         TextView timesText = findViewById(R.id.timesTimeText);
         TextView theNum = findViewById(R.id.nemberText);
+        Button productB = findViewById(R.id.productButton);
+        TextView upperText = findViewById(R.id.upper);
+        TextView lowerText = findViewById(R.id.lower);
+        upperText.setText("--");
+        lowerText.setText("--");
         nextB.setText("面積算法");
+        productB.setText("階乘算法");
         limB.setText("極限算法");
         timesText.setText("精度:");
         imageIndex++;
         isAreaMethod = 0;
         isLimitMethod = 0;
+        isFactorial = 0;
+        calE = 1;
+        factorialTime = 1;
         limitCurrent = 1;
-        if (imageIndex == 6) imageIndex = 0;
+        if (imageIndex == 7) imageIndex = 0;
         limitCurrent = 1;
         limResult = 1.0;
         headImage.setImageResource(headers[imageIndex]);
